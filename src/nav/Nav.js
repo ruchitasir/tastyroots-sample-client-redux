@@ -5,21 +5,34 @@ const Nav = props => {
   const handleLogout = e => {
     e.preventDefault()
     // TODO: Remove the token from localstorage (or cookies)
-    // TODO: Update the state of the App
+    // Update the state of the App
+     props.updateToken()
   }
 
   let links = (
     <span>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/signup">Signup</Link>
-      </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/signup">Signup</Link>
+        </li>
     </span>
   )
 
-  // TODO: If the user is logged in, show profile page and logout links
+  //  If the user is logged in, show profile page and logout links
+  if(props.user){
+    links = (
+        <span>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <a href="/" onClick={handleLogout}>Logout</a>
+          </li>
+       </span>
+    )
+  }
 
   return (
     <nav>
