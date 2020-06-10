@@ -1,6 +1,7 @@
 // Packages
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import { Button, Container, Form, Grid, Input } from 'semantic-ui-react'
 
 const Signup = props => {
   // Declare and initialize state variables
@@ -54,33 +55,43 @@ const Signup = props => {
   }
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <span className="red">{message}</span>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name:</label>
-          <input name="firstname" placeholder="Your first name" onChange={e => setFirstname(e.target.value)} />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input name="lastname" placeholder="Your last name" onChange={e => setLastname(e.target.value)} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" onChange={e => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password" onChange={e => setPassword(e.target.value)} />
-        </div>
-        <div>
-          <label>Profile Pic URL:</label>
-          <input type="url" name="profileUrl" onChange={e => setProfileUrl(e.target.value)} />
-        </div>
-        <button type="submit">Sign Me Up!</button>
-      </form>
-    </div>
+    <Container className="center-form">   
+      <Grid columns={2} verticalAlign="middle">
+        <Grid.Row>
+          <Grid.Column width={6} >
+        
+          </Grid.Column>
+          <Grid.Column width={2}></Grid.Column>
+          <Grid.Column width={6}>
+            <h3>Sign up</h3>
+            <Form onSubmit={handleSubmit} className="signup">
+              <span className="red">{message}</span>
+              <Form.Group>
+                <Form.Field>
+                  <label>First Name</label>
+                <Input name="firstname" placeholder="Your first name" onChange={(e) => setFirstname(e.target.value)} required/>
+                </Form.Field>
+                <Form.Field>
+                <label>Last Name</label>
+                <Input name="lastname" placeholder="Your last name" onChange={(e) => setLastname(e.target.value)} required/>
+                </Form.Field>
+              </Form.Group>
+              <Form.Group>
+                <Form.Field>
+                  <label>Email</label>
+                <Input type="email" placeholder="Your email"name="email" onChange={(e) => setEmail(e.target.value)} required/>
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                <Input type="password" placeholder="Minimum- 8 characters"name="password" onChange={(e) => setPassword(e.target.value)} required/>
+                </Form.Field>
+              </Form.Group>
+              <Button type="submit" color="yellow">Sign Me Up!</Button>
+            </Form>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Container>
   )
 }
 
