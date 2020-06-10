@@ -1,9 +1,10 @@
 import React from 'react'
+import Signup from './Signup'
 
 const Home = props => {
   return (
     <div>
-      <h2>HOME STUB</h2>
+      <Signup user={props.user} updateToken={props.updateToken}/>    
     </div>
   )
 }

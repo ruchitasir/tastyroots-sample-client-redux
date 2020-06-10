@@ -1,6 +1,7 @@
 // Packages
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import { Button, Form, Input, Menu } from 'semantic-ui-react'
 
 const Login = props => {
   // Declare and initialize state variables
@@ -50,21 +51,21 @@ const Login = props => {
 
 
   return (
-    <div>
-      <h2>Login</h2>
-      <span className="red">{message}</span>
-      <form onSubmit={handleSubmit}>
-          <div>
-            <label>Email:</label>
-            <input type="email" name="email" onChange={e => setEmail(e.target.value)} />
-          </div>
-          <div>
-            <label>Password:</label>
-            <input type="password" name="password" onChange={e => setPassword(e.target.value)} />
-          </div>
-          <button type="submit">Beam Me Up!</button>
-        </form>
-    </div>
+    <Menu.Menu position='right'>
+    <Form size={"tiny"} onSubmit={handleSubmit}>
+      <Form.Group className="login-fields" inline>
+      <Menu.Item>
+        <Input label="Email" onChange={(e) => setEmail(e.target.value)}/>
+      </Menu.Item>
+      <Menu.Item>
+        <Input label="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+      </Menu.Item>
+      <Menu.Item>
+      <Button color="blue" size={"tiny"} content="Login" icon="sign-in" labelPosition="right" type="submit"/>
+      </Menu.Item>
+      </Form.Group>
+    </Form>
+  </Menu.Menu>
   )
 }
 
