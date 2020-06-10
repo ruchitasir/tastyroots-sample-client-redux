@@ -1,29 +1,32 @@
 // Packages
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // Custom component
 import Home from './pages/Home'
-import Login from './pages/Login'
+import FamilyCircle from './pages/FamilyCircle'
+import Lost from './pages/Lost'
 import Profile from './pages/Profile'
-import Signup from './pages/Signup'
+import Recipe from './pages/Recipe'
+
 
 const Content = props => {
   return (
-    <div className="container">
       <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/login" render={
-        () => <Login user={props.user} updateToken={props.updateToken} />
-      } />
-      <Route path="/profile" render={
-        () => <Profile user={props.user} />
-      } />
-      <Route path="/signup" render={
-        () => <Signup user={props.user} updateToken={props.updateToken} />
-      } />
-    </Switch>
-    </div>
+        <Route exact path="/" render={
+          () => <Home user={props.user} />
+        } />
+        <Route path="/profile" render={
+          () => <Profile user={props.user} />
+        } />
+        <Route path="/recipes" render={
+          () => <Recipe user={props.user} />
+        } />
+        <Route path="/familycircle" render={
+          () => <FamilyCircle user={props.user} />
+        } />
+         <Route component={Lost} />
+      </Switch>
   )
 }
 

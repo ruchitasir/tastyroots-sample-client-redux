@@ -11,7 +11,6 @@ const Login = props => {
 
   // Event handlers
   const handleSubmit = e => {
-    
     e.preventDefault()
     console.log("submit", email, password)
     //  Fetch call to POST data
@@ -61,7 +60,7 @@ const Login = props => {
         <Input label="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
       </Menu.Item>
       <Menu.Item>
-      <Button color="blue" size={"tiny"} content="Login" icon="sign-in" labelPosition="right" type="submit"/>
+      <Button color="orange" size={"tiny"} content="Login" icon="sign-in" labelPosition="right" type="submit"/>
       </Menu.Item>
       </Form.Group>
     </Form>
