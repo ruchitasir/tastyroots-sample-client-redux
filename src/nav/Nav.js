@@ -1,14 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Login from '../content/pages/Login'
-import { Menu } from 'semantic-ui-react'
+import React, { FormEvent } from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { Dropdown, Menu } from 'semantic-ui-react'
+import Login from '../nav/Login'
 
-const Nav = props => {
-  const handleLogout = e => {
+
+const Nav = (props) => {
+  const handleLogout = (e) => {
     e.preventDefault()
-    // TODO: Remove the token from localstorage (or cookies)
-    // Update the state of the App
-     props.updateToken()
+    // Remove the token from local storage (or cookies)
+    props.updateToken('')
+    localStorage.removeItem('boilerToken')
+    return <Redirect to="/" />
   }
 
   var links = (
@@ -21,27 +23,42 @@ const Nav = props => {
     </Menu>
   )
 
-  //  If the user is logged in, show profile page and logout links
-  if(props.user){
+  // If the user is logged in, show profile page and logout links
+  if (props.user) {
     links = (
-        <span>
-          <li><Link to="/">Home</Link></li>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <a href="/" onClick={handleLogout}>Logout</a>
-          </li>
-       </span>
+      <Menu pointing secondary className="top-nav">
+        <Menu.Item
+          name='Home'
+          href="/"
+        /> 
+        <Menu.Menu position='right'>
+          <Menu.Item
+            name='Profile'
+            as={Link} to="/profile"
+          />
+          <Menu.Item
+            name='Family Circles'
+            as={Link} to="/familycircle"
+          />
+          <Menu.Item
+            name='Recipes'
+            as={Link} to="/recipes"
+          />
+          <Menu.Item
+            name='Logout'
+            as={Link} to="/"
+            onClick={handleLogout}
+          />
+        </Menu.Menu>
+      </Menu>
     )
   }
 
   return (
-    <nav>
-      <ul>
-        <li>{links}</li>
-      </ul>
-    </nav>
+    <div>
+      {links}
+    </div>
+
   )
 }
 

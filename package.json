@@ -1,5 +1,5 @@
 {
-  "name": "mern-auth-client",
+  "name": "tasty-roots-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +9,7 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.4.1",
+    "redux": "^4.0.5",
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
@@ -31,5 +32,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-redux": "^7.2.0",
+    "redux-devtools-extension": "^2.13.8"
   }
 }
