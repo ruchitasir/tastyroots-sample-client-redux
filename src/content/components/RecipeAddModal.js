@@ -1,5 +1,5 @@
 import React,{useState } from 'react';
-import { Button, Form, Header, Icon, Input, Modal } from 'semantic-ui-react'
+import { Button, Form, Header, Icon,  Modal } from 'semantic-ui-react'
 import RecipeAddStepsInModal from '../components/RecipeAddStepsInModal'
 import RecipeAddIngredientsModal from './RecipeAddIngredientsModal';
 
@@ -128,44 +128,21 @@ const RecipeAddModal= props=> {
                                 <Form.Input label="Cook Time" name="cookTime"   required />
                             </Form.Field>
                         </Form.Group>
-                            
-                            {
-                                //  ingredients.map((ing,ind)=>{
-                                //     console.log('ind',ind)
-                                //     return (
-                                //             <div> 
-                                //                 <Form.Group widths='equal'>
-                                //                     <Form.Field >
-                                //                         <Form.Input label="Quantity" name="qty" value={ing.qty}  onChange={(e)=>handleIngredientQuantityChange(e,ind)}  required />
-                                //                     </Form.Field>
-                                                 
-                                //                     <Form.Select fluid required label='Unit' name="unit"  options={unitOptions}   onChange={(e,data)=>handleIngredientUnitChange(e,data,ind)}  placeholder="Select measurement Unit"/>
-                                //                     </Form.Group>  
-                                //                 <Form.Group widths='equal'>
-                                //                     <Form.Field >
-                                //                         <Form.Input label="Ingredient" name="name" value={ing.name}  onChange={(e)=>handleIngredientNameChange(e,ind)}  required />
-                                //                     </Form.Field>
-                                //                     <Button onClick={()=> handleRemoveIngredient(ind)}>Remove</Button>
-                                //                 </Form.Group>
-                                //             </div>
-                                    
-                                //     )
-                                // })
-                            }
-                            <RecipeAddIngredientsModal ingredients={ingredients} unitOptions={unitOptions} handleIngredientQuantityChange={handleIngredientQuantityChange} handleIngredientUnitChange={handleIngredientUnitChange} handleIngredientNameChange={handleIngredientNameChange} handleRemoveIngredient={handleRemoveIngredient}/>
-                            <Form.Field>
-                             <Button onClick={addNewIngredient}>Add a new ingredient</Button>
-                             </Form.Field>
-
-                            <Form.Field>
-                                <input type="hidden"  name="id" />
-                            </Form.Field>
-                       
+            
+                        <RecipeAddIngredientsModal ingredients={ingredients} unitOptions={unitOptions} handleIngredientQuantityChange={handleIngredientQuantityChange} handleIngredientUnitChange={handleIngredientUnitChange} handleIngredientNameChange={handleIngredientNameChange} handleRemoveIngredient={handleRemoveIngredient}/>
+                        <Form.Field>
+                            <Button onClick={addNewIngredient}>Add a new ingredient</Button>
+                        </Form.Field>
+            
                         <RecipeAddStepsInModal steps={steps}  handleRemoveSteps={handleRemoveSteps} handleStepChange={handleStepChange}/>
-                        <Form.Group>
+                        <Form.Field>
                                 <Button onClick={(e)=>addSteps(e)}>Add steps</Button>
-                        </Form.Group>
-                        
+                        </Form.Field>
+
+                        <Form.Field>
+                                <input type="hidden"  name="id" />
+                        </Form.Field>
+
                 </Modal.Content>
             <Modal.Actions>
                 <Button color='green' type="submit">Add Recipe</Button>
