@@ -4,7 +4,6 @@ import ProfilePage from '../components/ProfilePage'
 
 const Profile = props => {
 
-  let [secretMessage, setSecretMessage] = useState('')
   let [userDetails, setUserDetails] = useState(null)
 
   useEffect(() => {
@@ -20,28 +19,25 @@ const Profile = props => {
         console.log('Response', response)
         // if not a good response
         if (!response.ok) {
-          setSecretMessage('Nice try!')
           return
         }
-        // If we get a good response
+        // If we get a good response, set the user details
         response.json()
           .then(result => {
-            console.log("WHAT RESULT", result)
             setUserDetails(result)
-            setSecretMessage(result.message)
           })
       })
       .catch(err => {
         console.log("Error in profile", err)
-        setSecretMessage('No message for you')
       })
-  })
-  console.log("DID WE GET USER DEETS", userDetails)
-  // Make Sure there is a user before trying to show their info
+  }, [])
+  // If user isn't signed in, redirect to home page to login
   if (!props.user) {
-    return <Redirect to="/" />
+    return (
+    <Redirect to="/" />
+    )
   }
-
+  // If user signed in show, user details
   return (
     <ProfilePage user={props.user} userDetails={userDetails} />
   )
