@@ -1,49 +1,63 @@
 import React,{useState } from 'react';
-import { Button, Form, Header, Icon, Input, Modal, DropdownProps } from 'semantic-ui-react'
+import { Button, Form, Header, Icon, Input, Modal } from 'semantic-ui-react'
+import RecipeAddStepsInModal from '../components/RecipeAddStepsInModal'
 
+const RecipeAddModal= props=> {
 
-const ProfileModal= props=> {
-
-    let [inputIngredient, setInputIngredient] = useState(false)
+    let [steps, setSteps] = useState([])
+    let [step,setStep]= useState()
 
     const servingsOptions =[
         {  text: '0.5', value: 0.5 },
         {  text: '1', value: 1 },
-        {  text: '1.5', value: 1.5 }
+        {  text: '1.5', value: 1.5 },
+        {  text: '2', value: 2 },
+        {  text: '2.5', value: 2.5 },
+        {  text: '3', value: 3 },
+        {  text: '3.5', value: 3.5 },
+        {  text: '4', value: 4 },
+        {  text: '4.5', value: 4.5 },
+        {  text: '5', value: 5 },
+        {  text: '5.5', value: 5.5 },
+        {  text: '6', value: 6 }
     ]
-
-    const prepTimeOptions = [
-        {  text: '', value: 0.5 },
-        {  text: '', value: 1 },
-        {  text: '', value: 1.5 }
-    ]
+   
 
     const addNewIngredient = ()=>{
         console.log('clicked for add new ingredient')
-        setInputIngredient(true)
+       
     }
 
-    let input = <div> </div>
-    if(inputIngredient){
-        console.log('inputIngredient',inputIngredient)
-        input = (
-            // <Form.Field>
-            //     <Form.Input label="Ingredient Name" name="name"   required />
-            //  </Form.Field>
-            <div>hello</div>
-        )
-        setInputIngredient(false)
+    const handleStepChange=(e,index)=>{
+        steps[index] = e.target.value
+        setStep(steps[index])
+        setSteps(steps)
+       
+    }
+
+    const addSteps =(e)=>{
+       setSteps([...steps,''])
+    }
+
+    const handleRemoveSteps=(index)=>{
+
+        console.log('steps',steps)
+        console.log('index to be removed',index)
+        console.log('step at index',steps[index])
+        let newSteps = [...steps]
+        console.log('newsteps',newSteps)
+        newSteps.splice(index,1)
+        console.log('newsteps after removal',newSteps)
+        setSteps(newSteps)
     }
 
     return (
 
     <Modal trigger={<Icon name='edit' size='large'></Icon>} size={"small"} as={Form}  closeIcon>  
-    {/* <Modal trigger={<Icon name='edit' size='large'></Icon>} size={"small"} as={Form} onSubmit={} closeIcon> */}
     <Header icon='user circle' content='Add new recipe' />
             <Modal.Content>
                         <Form.Group widths='equal'>
                             <Form.Field>
-                                {/* <Form.Input label="Recipe Name" name="recipeName" placeholder={props.user.firstname} onChange={} required /> */}
                                 <Form.Input label="Recipe Name" name="recipeName" required />
                             </Form.Field>
                             <Form.Field>
@@ -58,25 +72,26 @@ const ProfileModal= props=> {
                             <Form.Field>
                                 <Form.Input label="Cook Time" name="cookTime"   required />
                             </Form.Field>
+                          
                             <Form.Field>
                                 <Form.Input label="Ingredient Name" name="name"   required />
                             </Form.Field>
-                            {input}
                             <Button onClick={addNewIngredient}>Add a new ingredient</Button>
                             <Form.Field>
                                 <input type="hidden"  name="id" />
                             </Form.Field>
                         </Form.Group>
-                        <Form.Field>
-                                <label>Profile Pic</label>
-                                <Input name="pic"  />
-                        </Form.Field>
+                        <RecipeAddStepsInModal steps={steps}  handleRemoveSteps={handleRemoveSteps} handleStepChange={handleStepChange}/>
+                        <Form.Group>
+                                <Button onClick={(e)=>addSteps(e)}>Add steps</Button>
+                        </Form.Group>
+                        
                 </Modal.Content>
             <Modal.Actions>
-                <Button color='green' type="submit">Update</Button>
+                <Button color='green' type="submit">Add Recipe</Button>
             </Modal.Actions>
         </Modal>
           )
     }
 
-export default ProfileModal
+export default RecipeAddModal
