@@ -4,7 +4,7 @@ import { Button, Form } from 'semantic-ui-react'
 const RecipeAddStepsInModal= props=> {
  return ( 
             props.steps.map((step,ind)=>{
-                console.log('ind',ind)
+            
                 return (
                 
                         <Form.Group widths='equal'>

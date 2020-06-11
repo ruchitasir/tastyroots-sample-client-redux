@@ -5,6 +5,12 @@ import RecipeAddIngredientsModal from './RecipeAddIngredientsModal';
 
 const RecipeAddModal= props=> {
 
+    let [recipeName,setRecipeName] = useState()
+    let [decription,setDescription] = useState()
+    let [servings, setServings]= useState(2)
+    let [prepTime,setPrepTime]= useState()
+    let [cookTime,setCookTime]= useState()
+
     let [steps, setSteps] = useState([])
     let [step,setStep]= useState()
     let [ingredients, setIngredients] = useState([])
@@ -105,27 +111,71 @@ const RecipeAddModal= props=> {
         setSteps(newSteps)
     }
 
-    /*********************************************************/
+    /**************** Submitting the form ***************************************/
+
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+       let creatorId = props.user._id
+       let  originalRecipe = props.user._id
+       console.log('creator Id',creatorId)
+       console.log('Ingredients',ingredients)
+       let ingredients = ingredients.map((ing)=>{
+            let ingStr = ing.qty+','+ing.unit+','+ing.name
+            return ingStr
+        })
+        console.log('ingredients in string',ingredients)
+        // fetch(process.env.REACT_APP_SERVER_URL + 'recipe', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         recipeName,
+        //         originalRecipe,
+        //         description,
+        //         creatorId,
+        //         servings,
+        //         prepTime,
+        //         cookTime,
+        //         steps
+        //     }),
+        //     headers: {
+        //       'Content-Type' : 'application/json'
+        //     }
+        // })
+        // .then(response=>{
+        //     console.log("Here is the response!", response)
+        //     if (!response.ok){
+        //     setMessage(`${response.status} : ${response.statusText}`)
+        //     return
+        //     }
+        //     response.json().then(result => {
+        //     console.log("result!", result)
+        //     })
+        // })
+        // .catch(err=>{
+        //     console.log('ERROR SUBMITTING RECIPE ADD FORM',err)
+        // })
+    }
+
+    /**************************************************************************/
     return (
 
-    <Modal trigger={<Icon name='edit' size='large'></Icon>} size={"small"} as={Form}  closeIcon>  
+    <Modal trigger={<Icon name='edit' size='large'></Icon>} size={"small"} as={Form}  onSubmit={(e) => handleSubmit(e)} closeIcon>  
     <Header icon='user circle' content='Add new recipe' />
             <Modal.Content>
                         <Form.Group widths='equal'>
                             <Form.Field>
-                                <Form.Input label="Recipe Name" name="recipeName" required />
+                                <Form.Input label="Recipe Name" name="recipeName" onChange={(e)=> setRecipeName(e.target.value)} required />
                             </Form.Field>
                             <Form.Field>
-                                <Form.Input label="Description" name="description"   required />
+                                <Form.TextArea label="Description" name="description" onChange={(e)=> setDescription(e.target.value)}  required />
                             </Form.Field>
-                            <Form.Select fluid required label='Servings'  options={servingsOptions}  name="servings"  placeholder="Servings"/>
+                            <Form.Select fluid required label='Servings'  options={servingsOptions}  name="servings"  onChange={(e,data)=> setServings(data.value)}placeholder="Servings"/>
                         </Form.Group>
                         <Form.Group widths='equal'>
                             <Form.Field>
-                                <Form.Input label="Prep Time" name="prepTime"   required />
+                                <Form.Input label="Prep Time" name="prepTime"  onChange={(e)=> setPrepTime(e.target.value)}  />
                             </Form.Field>
                             <Form.Field>
-                                <Form.Input label="Cook Time" name="cookTime"   required />
+                                <Form.Input label="Cook Time" name="cookTime"  onChange={(e)=> setCookTime(e.target.value)}  />
                             </Form.Field>
                         </Form.Group>
             
@@ -139,9 +189,9 @@ const RecipeAddModal= props=> {
                                 <Button onClick={(e)=>addSteps(e)}>Add steps</Button>
                         </Form.Field>
 
-                        <Form.Field>
+                        {/* <Form.Field>
                                 <input type="hidden"  name="id" />
-                        </Form.Field>
+                        </Form.Field> */}
 
                 </Modal.Content>
             <Modal.Actions>
