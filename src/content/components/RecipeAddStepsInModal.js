@@ -8,7 +8,7 @@ const RecipeAddStepsInModal= props=> {
                 return (
                 
                         <Form.Group widths='equal'>
-                            <Form.Field className='index'>
+                            <Form.Field >
                                 <Form.Input label="Step" name="step"  value={step} onChange={(e)=>props.handleStepChange(e,ind)}  required />
                             </Form.Field>
                         
