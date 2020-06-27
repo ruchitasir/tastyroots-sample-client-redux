@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { Dropdown, Menu } from 'semantic-ui-react'
-import Login from '../nav/Login'
+import Login from './Login'
 
 
 const Nav = (props) => {

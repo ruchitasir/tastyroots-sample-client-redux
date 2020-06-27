@@ -1,6 +1,6 @@
 import React,{useState } from 'react';
 import { Button, Form, Header, Icon,  Modal } from 'semantic-ui-react'
-import RecipeAddStepsInModal from '../components/RecipeAddStepsInModal'
+import RecipeAddStepsInModal from './RecipeAddStepsInModal'
 import RecipeAddIngredientsModal from './RecipeAddIngredientsModal';
 
 

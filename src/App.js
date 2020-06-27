@@ -2,12 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
+import { Provider } from 'react-redux'
+import store from './redux/store/store'
 
 // Resources and custom components
 import './App.css';
 import Content from './content/Content'
 import Footer from './nav/Footer'
 import Nav from './nav/Nav'
+import UserComponent from './content/components/UserComponent';
+import LikeRecipe from './content/components/LikeRecipe';
 
 const App = props => {
   // Declare state variables
@@ -51,15 +55,19 @@ const App = props => {
   }
 
   return (
-    <Router>
-      <div className="App">
-        <Nav user={user} updateToken={updateToken}/>
-        <main>
-          <Content user={user} updateToken={updateToken}/>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <Provider store={store}> 
+      <Router>
+        <div className="App">
+          <Nav user={user} updateToken={updateToken}/>
+          <main>
+            <Content user={user} updateToken={updateToken}/>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+      {/* <UserComponent/>
+      <LikeRecipe/> */}
+    </Provider>
   )
 }
 

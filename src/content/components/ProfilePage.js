@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Loader, Segment  } from 'semantic-ui-react';
-import RecipeAddModal from '../components/RecipeAddModal'
+import RecipeAddModal from './RecipeAddModal'
 
 const ProfilePage = props => {
     if(!props.userDetails) {
